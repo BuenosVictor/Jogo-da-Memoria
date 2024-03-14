@@ -50,7 +50,7 @@ function schuffleCards(shuffledCards) {
 
 function createCardsFromTechs(techs) {
 
-    let createdCards = []
+    const createdCards = []
 
     for (let tech of techs)
     createdCards.push(createPairFromTech(tech))
