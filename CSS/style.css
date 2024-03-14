@@ -52,7 +52,6 @@ body {
 
 
 .gameBoard{
-    background-color: tomato;
     display: grid;
     grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
     gap: 1.5vw;
