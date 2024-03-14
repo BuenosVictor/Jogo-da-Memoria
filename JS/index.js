@@ -15,14 +15,14 @@ let techs = [
 ];
 
 
-let cards = null
+let cards = []
 
 startGame()
 
 function startGame() {
 
     cards = createCardsFromTechs(techs)
-    // schuffleCards(cards)
+    schuffleCards(cards)
     console.log(cards);
 
 }
@@ -30,7 +30,7 @@ function startGame() {
 //não entendi o direito daqui
 
 
-function schuffleCards(cards) {
+function schuffleCards(shuffledCards) {
 
     let currentIndex = cards.length;
     let randomIndex = 0;
@@ -42,7 +42,7 @@ function schuffleCards(cards) {
 
         //até aqui
 
-        [cards[randomIndex], cards[currentIndex]] = [cards[currentIndex], cards[randomIndex]]
+        [shuffledCards[randomIndex], shuffledCards[currentIndex]] = [shuffledCards[currentIndex], shuffledCards[randomIndex]]
     }
 
 }
@@ -50,12 +50,12 @@ function schuffleCards(cards) {
 
 function createCardsFromTechs(techs) {
 
-    let cards = []
+    let createdCards = []
 
     for (let tech of techs)
-        cards.push(createPairFromTech(tech))
+    createdCards.push(createPairFromTech(tech))
 
-    console.log(cards.flatMap(pair => pair));
+    return(createdCards.flatMap(pair => pair));
 }
 
 function createPairFromTech(tech) {
