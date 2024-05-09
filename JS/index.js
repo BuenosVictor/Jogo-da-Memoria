@@ -89,30 +89,30 @@ function schuffleCards(shuffledCards) {
 
 // sera q eu n deveria mudar o nome do parametro "techs"??
 
-// function createCardsFromTechs(techs) {
+function createCardsFromTechs(techs) {
 
-//     const createdCards = []
+    const createdCards = []
 
-//     for (let tech of techs)
-//     createdCards.push(createPairFromTech(tech))
+    for (let tech of techs)
+    createdCards.push(createPairFromTech(tech))
 
-//     return(createdCards.flatMap(pair => pair));
-// }
+    return(createdCards.flatMap(pair => pair));
+}
 
-// function createPairFromTech(tech) {
-//     return [{
-//         class: createClassWithTech(tech),
-//         icon: tech,
-//         flipped: false
-//     },
-//     {
-//         class: createClassWithTech(tech),
-//         icon: tech,
-//         flipped: false
-//     }
-//     ]
-// }
+function createPairFromTech(tech) {
+    return [{
+        class: createClassWithTech(tech),
+        icon: tech,
+        flipped: false
+    },
+    {
+        class: createClassWithTech(tech),
+        icon: tech,
+        flipped: false
+    }
+    ]
+}
 
-// function createClassWithTech(tech) {
-//     return tech + parseInt(Math.random() * 100)
-// }
+function createClassWithTech(tech) {
+    return tech + parseInt(Math.random() * 100)
+}

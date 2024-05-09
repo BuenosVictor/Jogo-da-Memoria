@@ -1,51 +1,51 @@
-let game = {
+// let game = {
 
-    techs: [
-        'bootstra1p',
-        'css',
-        'eletron',
-        'firebase',
-        'html',
-        'javascript',
-        'jquery',
-        'mongo',
-        'node',
-        'react'
-    ],
+//     techs: [
+//         'bootstra1p',
+//         'css',
+//         'eletron',
+//         'firebase',
+//         'html',
+//         'javascript',
+//         'jquery',
+//         'mongo',
+//         'node',
+//         'react'
+//     ],
 
-    cards: [],
+//     cards: [],
 
-    createCardsFromTechs: function () {
+//     createCardsFromTechs: function () {
 
-        const createdCards = []
+//         const createdCards = []
 
-        this.techs.forEach( (tech) =>{
-            createdCards.push(createPairFromTech(tech))
-        })
+//         this.techs.forEach( (tech) =>{
+//             createdCards.push(createPairFromTech(tech))
+//         })
             
-        return (createdCards.flatMap(pair => pair));
-    },
+//         return (createdCards.flatMap(pair => pair));
+//     },
 
-    createPairFromTech: function (forEachPair) {
-        return [{
-            class: createIdWithTech(forEachPair),
-            icon: forEachPair,
-            flipped: false
-        },
-        {
-            class: createIdWithTech(forEachPair),
-            icon: forEachPair,
-            flipped: false
-        }
-        ]
-    },
+//     createPairFromTech: function (forEachPair) {
+//         return [{
+//             class: createIdWithTech(forEachPair),
+//             icon: forEachPair,
+//             flipped: false
+//         },
+//         {
+//             class: createIdWithTech(forEachPair),
+//             icon: forEachPair,
+//             flipped: false
+//         }
+//         ]
+//     },
 
-    createIdWithTech: function createIdWithTech(language) {
-        return language + parseInt(Math.random() * 100)
-    }
-
-
+//     createIdWithTech: function createIdWithTech(language) {
+//         return language + parseInt(Math.random() * 100)
+//     }
 
 
 
-}
+
+
+// }
