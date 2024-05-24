@@ -1,6 +1,6 @@
-*{
+* {
     margin: 0px;
-    padding:0px;
+    padding: 0px;
     box-sizing: border-box;
 }
 
@@ -32,6 +32,8 @@ body {
     box-shadow: 7px 7px 25px rgba(0, 0, 0, 45);
     position: absolute;
     backface-visibility: hidden;
+    cursor: pointer;
+    user-select: none;
 }
 
 .cardFront {
@@ -46,12 +48,12 @@ body {
     font-size: 30px;
 }
 
-.flip{
-    transform:rotateY(180deg) ;
+.flip {
+    transform: rotateY(180deg);
 }
 
 
-.gameBoard{
+.gameBoard {
     display: grid;
     grid-template: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
     gap: 1.5vw;
@@ -60,7 +62,7 @@ body {
 
 
 
-.gameover{
+.gameover {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -74,7 +76,7 @@ body {
     top: 0px;
 }
 
-.restart{
+.restart {
     padding: 20px;
     font-size: 20px;
     background-color: yellow;
