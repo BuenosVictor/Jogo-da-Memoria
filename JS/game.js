@@ -1,10 +1,13 @@
 let game = {
 
-    front : "cardFront",
-    back : "cardBack",
-    card : "card",
-    icon : "icon",
-    gameBoard : document.querySelector(".gameBoard"),
+    front: "cardFront",
+    back: "cardBack",
+    card: "card",
+    icon: "icon",
+    lockMode: false,
+    firstCard: null,
+    secondCard: null,
+    gameBoard: document.querySelector(".gameBoard"),
 
     cards: [],
 
@@ -21,45 +24,99 @@ let game = {
         'react'
     ],
 
-    inicializeCards:function (boardCards){
+    setCard: function (img) {
+        let equalCards = this.createdCards.filter(Image => Image.id === img)[0]
+
+        if (equalCards.flipped || this.lockMode) {
+            return false
+        }
+
+        if (!this.firstCard) {
+            this.firstCard = equalCards
+            return true
+        } else {
+            this.secondCard = equalCards
+            this.lockMode = true
+            return true
+        }
+
+    },
+
+    flipCard: function () {
+        if (this.setCard(this.createdCards)) {
+
+
+            this.classList.add("flip")
+
+            if (this.checkMatch()) {
+                this.clearCards
+            } else {
+                setTimeout(() => {
+                    let firstCardView = document.getElementById(this.firstCard.id);
+                    let secondCardView = document.getElementById(this.secondCard.id);
+
+                    firstCardView.classList.remove('flip');
+                    secondCardView.classList.remove('flip');
+                    this.clearCards()
+                }, 1000);
+            }
+        }
+    },
+
+    resetGameBoard: function () {
+        gameBoard = document.querySelector('.gameBoard');
+        gameBoard.innerHTML = '';
+    },
+
+    checkMatch: function () {
+        return this.firstCard.icon === this.secondCard.icon
+    },
+
+    clearCards: function () {
+        this.firstCard = null
+        this.secondCard = null
+        this.lockMode = null
+    },
+
+    inicializeCards: function (boardCards) {
         const gameBoard = document.querySelector(".gameBoard")
-        
-        boardCards.forEach( (newCard) => {
+
+        boardCards.forEach((newCard) => {
             let cardElement = document.createElement('div')
             cardElement.classList.add(this.card)
             cardElement.id = newCard.id
             cardElement.dataset.icon = newCard.icon
             cardElement.addEventListener('click', this.flipCard)
-    
+
             this.createCardContent(newCard, cardElement)
-    
+
             gameBoard.appendChild(cardElement)
         });
-    
-    
+
+
     },
-    
-    createCardContent:function (cardContainer,cardAttribute){
-        this.createCardFace(this.front, cardContainer,cardAttribute)
-        this.createCardFace(this.back, cardContainer,cardAttribute)
-    
-    
+
+    createCardContent: function (cardContainer, cardAttribute) {
+        this.createCardFace(this.front, cardContainer, cardAttribute)
+        this.createCardFace(this.back, cardContainer, cardAttribute)
+
+
     },
-    
-    createCardFace: function (face, cardImg, element){
+
+    createCardFace: function (face, cardImg, element) {
         let cardElementFace = document.createElement('div')
         cardElementFace.classList.add(face)
-        if(face === this.front){
+        if (face === this.front) {
             let iconElement = document.createElement('img')
             iconElement.classList.add(this.icon)
             iconElement.src = "./images/" + cardImg.icon + ".png"
             cardElementFace.appendChild(iconElement)
-        }else{
+        } else {
             cardElementFace.innerHTML = "&lt/&gt"
         }
-    
+
         element.appendChild(cardElementFace)
-    
+
     },
 
 
@@ -103,17 +160,9 @@ let game = {
     },
 
     createidWithTech: function (language) {
-        return language + parseInt(Math.random() * 100) 
+        return language + parseInt(Math.random() * 100)
     },
 
-    flipCard:function (){
-        this.classList.add("flip")
-    },
-
-    resetGameBoard: function () {
-        gameBoard = document.querySelector('.gameBoard');
-        gameBoard.innerHTML = '';
-    },
 
 
 }
