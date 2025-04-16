@@ -85,3 +85,65 @@ body {
     margin-top: 3vw;
     cursor: pointer;
 }
+
+.cardFront img {
+    width: 90%;
+    height: auto;
+    max-height: 90%;
+    user-select: none;
+}
+
+/* Responsividade para tablets */
+@media (max-width: 1024px) {
+    .gameBoard {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.5vw;
+        padding: 2vw;
+        height: 90vh;
+    }
+
+}
+
+/* Responsividade para celulares */
+@media (max-width: 600px) {
+    .gameBoard {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1vw;
+        padding: 2vw;
+        height: 90vh;
+    }
+
+    .card {
+        width: 100%;
+        aspect-ratio: 2 / 3;
+    }
+
+    .gameover {
+        font-size: 20px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .restart {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gameBoard {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1vw;
+        padding: 2vw;
+        height: 90vh;
+    }
+
+    .card {
+        width: 100%;
+        aspect-ratio: 3 / 4;
+    }
+
+    .cardFront img {
+        width: 60%;
+        max-height: 60%;
+    }
+}
