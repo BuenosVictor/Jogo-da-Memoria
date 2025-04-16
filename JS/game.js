@@ -8,6 +8,7 @@ let game = {
     firstCard: null,
     secondCard: null,
     gameBoard: document.querySelector(".gameBoard"),
+    gameOverLayer: document.querySelector(".gameover"),
 
     cards: [],
 
@@ -25,72 +26,95 @@ let game = {
     ],
 
     setCard: function (img) {
-        let equalCards = this.createdCards.filter(Image => Image.id === img)[0]
+        let equalCards = this.cards.filter(Image => Image.id === img)[0]
 
-        if (equalCards.flipped || this.lockMode) {
+
+        if (!equalCards) {
+            if (this.secondCard) {
+                equalCards = this.secondCard
+            } else {
+                equalCards = this.firstCard
+            }
+        } else if (equalCards.flipped || this.lockMode) {
             return false
-        }
-
-        if (!this.firstCard) {
+        } else if (!this.firstCard) {
             this.firstCard = equalCards
+            this.firstCard.flipped = true
             return true
         } else {
             this.secondCard = equalCards
+            this.secondCard.flipped = true
             this.lockMode = true
             return true
         }
 
     },
 
-    flipCard: function () {
-        if (this.setCard(this.createdCards)) {
+    //por que quando eu uso o "this." ao inves de "game." fala que setCard não é um função?
 
 
-            this.classList.add("flip")
+    flipCard: function (event) {
+        let cardElement = event.target.parentNode
+        let cardId = cardElement.id
 
-            if (this.checkMatch()) {
-                this.clearCards
-            } else {
-                setTimeout(() => {
-                    let firstCardView = document.getElementById(this.firstCard.id);
-                    let secondCardView = document.getElementById(this.secondCard.id);
+        if (game.setCard(cardId)) {
 
-                    firstCardView.classList.remove('flip');
-                    secondCardView.classList.remove('flip');
+            cardElement.classList.add("flip")
+            if (this.secondCard) {
+                if (this.checkMatch()) {
                     this.clearCards()
-                }, 1000);
+                    if (checkGameOver()) {
+                        this.gameOverLayer.style.display = "flex"                        
+                    }
+                } else {
+                    setTimeout(() => {
+                        let firstCardView = document.getElementById(this.firstCard.id);
+                        let secondCardView = document.getElementById(this.secondCard.id);
+
+                        firstCardView.classList.remove('flip');
+                        secondCardView.classList.remove('flip');
+                        this.unflipCards();
+                    }, 1000);
+
+                }
             }
         }
     },
 
     resetGameBoard: function () {
-        gameBoard = document.querySelector('.gameBoard');
-        gameBoard.innerHTML = '';
+        this.gameBoard.innerHTML = '';
     },
 
     checkMatch: function () {
+
         return this.firstCard.icon === this.secondCard.icon
     },
 
     clearCards: function () {
         this.firstCard = null
         this.secondCard = null
-        this.lockMode = null
+        this.lockMode = false
+    },
+
+    unflipCards: function () {
+        this.firstCard.flipped = false;
+        this.secondCard.flipped = false;
+        this.clearCards();
     },
 
     inicializeCards: function (boardCards) {
-        const gameBoard = document.querySelector(".gameBoard")
+        this.resetGameBoard()
 
         boardCards.forEach((newCard) => {
             let cardElement = document.createElement('div')
             cardElement.classList.add(this.card)
             cardElement.id = newCard.id
             cardElement.dataset.icon = newCard.icon
-            cardElement.addEventListener('click', this.flipCard)
+            cardElement.addEventListener('click', (Event) => this.flipCard(Event))
 
             this.createCardContent(newCard, cardElement)
 
-            gameBoard.appendChild(cardElement)
+            this.gameBoard.appendChild(cardElement)
         });
 
 
@@ -137,7 +161,7 @@ let game = {
     },
 
     createCardsFromTechs: function () {
-
+        this.cards = [];
         this.techs.forEach((tech) => {
             this.cards.push(...this.createPairFromTech(tech))
         })

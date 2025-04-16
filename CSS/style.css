@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #c7cdd3;
+    background-color: #3232cdf5;
 }
 
 .card {
@@ -30,7 +30,7 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    box-shadow: 7px 7px 25px rgba(0, 0, 0, 45);
+    box-shadow: 5px 5px 9px rgba(0, 0, 0, 45);
     position: absolute;
     backface-visibility: hidden;
     cursor: pointer;
@@ -83,4 +83,5 @@ body {
     background-color: yellow;
     border-radius: 10px;
     margin-top: 3vw;
+    cursor: pointer;
 }
