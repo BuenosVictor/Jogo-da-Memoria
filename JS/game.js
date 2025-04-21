@@ -50,8 +50,6 @@ let game = {
 
     },
 
-    //por que quando eu uso o "this." ao inves de "game." fala que setCard não é um função?
-
 
     flipCard: function (event) {
         let cardElement = event.target.parentNode
