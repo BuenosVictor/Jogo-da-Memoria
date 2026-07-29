@@ -1,5 +1,4 @@
-let restartButton = document.querySelector(".restart")
-let allCards = document.querySelectorAll(".card")
+let createdCards = []
 
 startGame()
 function startGame() {

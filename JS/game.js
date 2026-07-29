@@ -28,26 +28,20 @@ let game = {
     setCard: function (img) {
         let equalCards = this.cards.filter(Image => Image.id === img)[0]
 
-
-        if (!equalCards) {
-            if (this.secondCard) {
-                equalCards = this.secondCard
-            } else {
-                equalCards = this.firstCard
-            }
-        } else if (equalCards.flipped || this.lockMode) {
+        if (!equalCards || equalCards.flipped || this.lockMode) {
             return false
-        } else if (!this.firstCard) {
+        }
+
+        if (!this.firstCard) {
             this.firstCard = equalCards
             this.firstCard.flipped = true
             return true
-        } else {
-            this.secondCard = equalCards
-            this.secondCard.flipped = true
-            this.lockMode = true
-            return true
         }
 
+        this.secondCard = equalCards
+        this.secondCard.flipped = true
+        this.lockMode = true
+        return true
     },
 
 
