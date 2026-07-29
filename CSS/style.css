@@ -18,14 +18,59 @@
 body {
     font-family: 'Righteous', sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: clamp(10px, 1.8vmin, 22px);
     min-height: 100vh;
     min-height: 100svh;
     background:
         radial-gradient(120% 90% at 50% -10%, var(--bg-glow) 0%, transparent 60%),
         var(--bg-deep);
     overflow: hidden;
+}
+
+.hud {
+    width: var(--board-w);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.moves {
+    color: #cfe4ff;
+    font-size: clamp(13px, 2.1vmin, 20px);
+    letter-spacing: .04em;
+}
+
+.moves .moveCount {
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+}
+
+.btnRestart {
+    font-family: inherit;
+    font-size: clamp(12px, 1.9vmin, 17px);
+    color: #cfe4ff;
+    padding: .6em 1.4em;
+    border: 1px solid rgba(160, 210, 255, .35);
+    border-radius: 999px;
+    background: rgba(160, 210, 255, .08);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.btnRestart:hover {
+    background: rgba(160, 210, 255, .18);
+    border-color: rgba(160, 210, 255, .6);
+    color: #fff;
+}
+
+.btnRestart:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
 }
 
 .gameBoard {
@@ -161,6 +206,7 @@ body {
 
     .card,
     .restart,
+    .btnRestart,
     .gameover {
         transition-duration: .01ms;
         animation-duration: .01ms;

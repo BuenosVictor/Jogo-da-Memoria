@@ -7,9 +7,11 @@ let game = {
     lockMode: false,
     firstCard: null,
     secondCard: null,
+    moves: 0,
     unflipTimeout: null,
     gameBoard: document.querySelector(".gameBoard"),
     gameOverLayer: document.querySelector(".gameover"),
+    moveCounter: document.querySelector(".moveCount"),
 
     cards: [],
 
@@ -45,6 +47,11 @@ let game = {
         return true
     },
 
+    setMoves: function (value) {
+        this.moves = value
+        this.moveCounter.textContent = value
+    },
+
 
     flipCard: function (event) {
         let cardElement = event.target.parentNode
@@ -54,6 +61,7 @@ let game = {
 
             cardElement.classList.add("flip")
             if (this.secondCard) {
+                this.setMoves(this.moves + 1)
                 if (this.checkMatch()) {
                     this.clearCards()
                     if (checkGameOver()) {
