@@ -7,6 +7,7 @@ let game = {
     lockMode: false,
     firstCard: null,
     secondCard: null,
+    unflipTimeout: null,
     gameBoard: document.querySelector(".gameBoard"),
     gameOverLayer: document.querySelector(".gameover"),
 
@@ -59,7 +60,7 @@ let game = {
                         this.gameOverLayer.style.display = "flex"                        
                     }
                 } else {
-                    setTimeout(() => {
+                    this.unflipTimeout = setTimeout(() => {
                         let firstCardView = document.getElementById(this.firstCard.id);
                         let secondCardView = document.getElementById(this.secondCard.id);
 
@@ -74,6 +75,7 @@ let game = {
     },
 
     resetGameBoard: function () {
+        clearTimeout(this.unflipTimeout)
         this.gameBoard.innerHTML = '';
     },
 
